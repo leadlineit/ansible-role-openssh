@@ -3,7 +3,7 @@
   template:
     src: trusted-user-ca-keys.j2
     dest: /etc/ssh/trusted-user-ca-keys.pem
-    mode: u=rw,g=r,o=r
+    mode: '644'
   when: ssh_trusted_user_ca_keys is defined
 
 - name: Configure sshd_config file
