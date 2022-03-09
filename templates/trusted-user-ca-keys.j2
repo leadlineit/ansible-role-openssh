@@ -1,0 +1,5 @@
+{% if ssh_trusted_user_ca_keys is defined %}
+{% for ca_key in ssh_trusted_user_ca_keys %}
+{{ ca_key }}
+{% endfor %}
+{% endif %}

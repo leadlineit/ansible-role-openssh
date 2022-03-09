@@ -1,0 +1,6 @@
+---
+- name: Install OpenSSH Server
+  apt:
+    update_cache: true
+    name: openssh-server
+    state: present

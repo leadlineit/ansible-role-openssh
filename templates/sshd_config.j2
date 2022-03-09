@@ -1,0 +1,58 @@
+#{{ ansible_managed }}
+Port {{ ssh_port|default(22) }}
+{% if ssh_address is defined %}
+{% for addr in ssh_address %}
+ListenAddress {{ addr }}
+{% endfor %}
+{% endif %}
+
+HostKey /etc/ssh/ssh_host_ed25519_key
+HostKey /etc/ssh/ssh_host_rsa_key
+HostKey /etc/ssh/ssh_host_ecdsa_key
+{% if ssh_trusted_user_ca_keys is defined %}
+TrustedUserCAKeys /etc/ssh/trusted-user-ca-keys.pem
+{% endif %}
+
+{% if ssh_kexalgorithms is defined %}
+KexAlgorithms {{ ssh_kexalgorithms }}
+{% endif %}
+{% if ssh_ciphers is defined %}
+Ciphers {{ ssh_ciphers }}
+{% endif %}
+{% if ssh_macs is defined %}
+MACs {{ ssh_macs }}
+{% endif %}
+
+PermitRootLogin {{ ssh_permit_root_login|default('without-password') }}
+PermitEmptyPasswords no
+PubkeyAuthentication yes
+ChallengeResponseAuthentication no
+UsePAM yes
+PrintMotd no
+UseDNS no
+DebianBanner no
+
+# Allow client to pass locale environment variables
+AcceptEnv LANG LC_*
+
+# override default of no subsystems
+Subsystem sftp /usr/lib/openssh/sftp-server -f AUTHPRIV -l INFO
+
+{% if ssh_match_users is defined %}
+{% for user in ssh_match_users %}
+Match User {{ user.name }}
+{% for o in user.options %}
+    {{ o }}
+{% endfor %}
+
+{% endfor %}
+{% endif %}
+{% if ssh_match_address is defined %}
+{% for addr in ssh_match_address %}
+{% if addr.name == 'permit_root_login_yes' %}
+Match{% if addr.ip is defined %} Address {% for ip in addr.ip %}{{ ip }}{% if not loop.last %},{% endif %}{% endfor %}{% endif %}{% if addr.host is defined %} Host {% for host in addr.host %}{{ host }}{% if not loop.last %},{% endif %}{% endfor %}{% endif %}{{ ' ' }}
+    PermitRootLogin yes
+{% endif %}
+
+{% endfor %}
+{% endif %}

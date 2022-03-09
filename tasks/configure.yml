@@ -1,0 +1,21 @@
+---
+- name: Fill up TrustedUserCAKeys file
+  template:
+    src: trusted-user-ca-keys.j2
+    dest: /etc/ssh/trusted-user-ca-keys.pem
+    mode: u=rw,g=r,o=r
+  when: ssh_trusted_user_ca_keys is defined
+
+- name: Configure sshd_config file
+  template:
+    src: sshd_config.j2
+    dest: /etc/ssh/sshd_config
+    mode: '644'
+  notify:
+    - reload ssh
+
+- name: Check syntax of sshd_config file
+  command: sshd -t
+  register: result
+  changed_when: "result.rc != 0"
+  failed_when: ('ERROR' in result.stdout)

@@ -1,0 +1,12 @@
+---
+- name: Converge
+  hosts: all
+  tasks:
+    - name: Install requirements
+      apt:
+        name: gnupg
+        state: present
+        update_cache: true
+    - name: "Include leadlineit.openssh"
+      include_role:
+        name: "leadlineit.openssh"

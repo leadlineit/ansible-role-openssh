@@ -1,0 +1,17 @@
+---
+galaxy_info:
+  role_name: openssh
+  namespace: leadlineit
+  author: Stas Stavnichuk
+  description: Install and configure OpenSSH-Server
+  license: MIT
+  min_ansible_version: 2.5
+  platforms:
+    - name: Debian
+      versions:
+        - buster
+        - bullseye
+  galaxy_tags:
+    - system
+    - debian
+    - openssh

@@ -1,0 +1,10 @@
+---
+- import_tasks: install.yml
+  tags:
+    - install_openssh
+    - install
+
+- import_tasks: configure.yml
+  tags:
+    - configure_openssh
+    - configure
