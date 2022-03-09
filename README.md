@@ -1,6 +1,6 @@
 # Ansible Role for OpenSSH-Server
 
-![Build Status](https://github.com/leadlineit/ansible-role-openssh/actions/workflows/ci.yaml/badge.svg)
+![Build Status](https://github.com/leadlineit/ansible-role-openssh/actions/workflows/ansible-galaxy-ci.yml/badge.svg)
 
 This role helps to install and configure openssh-server.
 
