@@ -1,6 +1,8 @@
 ---
 - name: Install OpenSSH Server
-  apt:
-    update_cache: true
-    name: openssh-server
+  ansible.builtin.apt:
+    name: "{{ item }}"
     state: present
+    update_cache: true
+  with_items:
+    - openssh-server

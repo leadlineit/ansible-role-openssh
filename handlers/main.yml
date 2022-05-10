@@ -1,7 +1,5 @@
 ---
-# handlers file for openssh
-
-- name: reload ssh
-  service:
+- name: Reload ssh service
+  ansible.builtin.service:
     name: ssh
     state: reloaded
