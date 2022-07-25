@@ -20,10 +20,3 @@ platforms:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
     privileged: true
     pre_build_image: true
-  - name: instance-centos
-    image: "6nsh/centos:molecule-${MOLECULE_DISTRO:-stream8}"
-    command: ""
-    volumes:
-      - /sys/fs/cgroup:/sys/fs/cgroup:ro
-    privileged: true
-    pre_build_image: true

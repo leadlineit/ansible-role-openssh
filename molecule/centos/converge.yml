@@ -2,12 +2,6 @@
 - name: Converge
   hosts: all
   tasks:
-    - name: Install requirements for Debian
-      when: ansible_os_family == 'Debian'
-      ansible.builtin.apt:
-        name: gnupg
-        state: present
-        update_cache: true
     - name: Install requirements for RedHat
       when: ansible_os_family == 'RedHat'
       ansible.builtin.yum:

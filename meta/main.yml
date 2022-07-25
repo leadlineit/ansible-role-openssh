@@ -5,14 +5,20 @@ galaxy_info:
   author: Stas Stavnichuk
   description: Install and configure OpenSSH-Server
   license: MIT
-  min_ansible_version: 2.5
+  min_ansible_version: '2.5'
   platforms:
     - name: Debian
       versions:
-        - stretch
-        - buster
         - bullseye
+        - buster
+        - stretch
+    - name: EL
+      versions:
+        - '8'
+        - '7'
   galaxy_tags:
     - system
     - debian
+    - centos
+    - el
     - openssh

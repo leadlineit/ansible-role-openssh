@@ -8,12 +8,6 @@
         name: gnupg
         state: present
         update_cache: true
-    - name: Install requirements for RedHat
-      when: ansible_os_family == 'RedHat'
-      ansible.builtin.yum:
-        name: gnupg
-        state: present
-        update_cache: true
     - name: "Include leadlineit.openssh"
       ansible.builtin.include_role:
         name: "leadlineit.openssh"

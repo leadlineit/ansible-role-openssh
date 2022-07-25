@@ -3,7 +3,7 @@
 ![Build Status](https://github.com/leadlineit/ansible-role-openssh/actions/workflows/ansible-galaxy-ci.yml/badge.svg)
 [![Galaxy Role](https://img.shields.io/badge/Ansible--Galaxy-leadlineit.openssh-blue.svg?logo=ansible&logoColor=white)](https://galaxy.ansible.com/leadlineit/openssh/)
 
-This role helps to install and configure openssh-server on a Debian (buster/bullseye).
+This role helps to install and configure openssh-server on a Debian (stretch/buster/bullseye) or Red Hat EL(7/8).
 
 Requirements
 ------------

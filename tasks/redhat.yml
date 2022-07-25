@@ -1,0 +1,10 @@
+---
+- ansible.builtin.include_tasks: "{{ role_path }}/tasks/redhat/install.yml"
+  tags:
+    - install_openssh
+    - install
+
+- ansible.builtin.include_tasks: "{{ role_path }}/tasks/redhat/configure.yml"
+  tags:
+    - configure_openssh
+    - configure

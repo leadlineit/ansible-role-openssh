@@ -1,0 +1,8 @@
+---
+- name: Install OpenSSH Server
+  ansible.builtin.yum:
+    name: "{{ item }}"
+    state: present
+    update_cache: true
+  with_items:
+    - openssh-server

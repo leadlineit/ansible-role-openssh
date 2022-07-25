@@ -34,17 +34,17 @@ jobs:
       - name: Lint code
         run: |
           yamllint .
-  test:
-    name: Molecule tests
+  test_debian:
+    name: Molecule tests for Debian
     runs-on: ubuntu-latest
     needs:
       - lint
     strategy:
       matrix:
         distro:
-          - stretch
-          - buster
           - bullseye
+          - buster
+          - stretch
     steps:
       - name: checkout
         uses: actions/checkout@v2
@@ -65,7 +65,43 @@ jobs:
           docker
       - name: Test with molecule
         run: |
-          molecule test
+          molecule test --scenario-name debian
+        env:
+          PY_COLORS: '1'
+          ANSIBLE_FORCE_COLOR: '1'
+          MOLECULE_DISTRO: ${{ matrix.distro }}
+
+  test_centos:
+    name: Molecule tests for CentOS
+    runs-on: ubuntu-latest
+    needs:
+      - lint
+    strategy:
+      matrix:
+        distro:
+          - '7'
+          - stream8
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+        with:
+          path: 'leadlineit.openssh'
+      - name: Set up Python 3
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install ansible \
+          ansible-lint \
+          molecule[docker,lint] \
+          flake8 \
+          yamllint \
+          docker
+      - name: Test with molecule
+        run: |
+          molecule test --scenario-name centos
         env:
           PY_COLORS: '1'
           ANSIBLE_FORCE_COLOR: '1'
@@ -74,7 +110,8 @@ jobs:
   release:
     name: Release
     needs:
-      - test
+      - test_debian
+      - test_centos
     runs-on: ubuntu-latest
     steps:
       - name: checkout
