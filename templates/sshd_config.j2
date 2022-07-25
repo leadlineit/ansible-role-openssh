@@ -30,7 +30,9 @@ ChallengeResponseAuthentication no
 UsePAM yes
 PrintMotd no
 UseDNS no
+{% if ansible_os_family == 'Debian' %}
 DebianBanner no
+{% endif %}
 
 # Allow client to pass locale environment variables
 AcceptEnv LANG LC_*
