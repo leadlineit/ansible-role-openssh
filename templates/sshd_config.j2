@@ -30,6 +30,9 @@ ChallengeResponseAuthentication no
 UsePAM yes
 PrintMotd no
 UseDNS no
+{% if ansible_os_family == 'RedHat' %}
+GSSAPIAuthentication no
+{% endif %}
 {% if ansible_os_family == 'Debian' %}
 DebianBanner no
 {% endif %}

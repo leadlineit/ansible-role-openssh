@@ -12,7 +12,7 @@
     dest: /etc/ssh/sshd_config
     mode: '644'
   notify:
-    - reload sshd service
+    - Reload sshd service
 
 - name: Check syntax of sshd_config file
   ansible.builtin.command: sshd -t

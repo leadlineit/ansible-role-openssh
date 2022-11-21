@@ -1,10 +1,12 @@
 ---
-- ansible.builtin.include_tasks: "{{ role_path }}/tasks/debian/install.yml"
+- name: Include ./debian/install.yml
+  ansible.builtin.include_tasks: "{{ role_path }}/tasks/debian/install.yml"
   tags:
     - install_openssh
     - install
 
-- ansible.builtin.include_tasks: "{{ role_path }}/tasks/debian/configure.yml"
+- name: Include ./debian/configure.yml
+  ansible.builtin.include_tasks: "{{ role_path }}/tasks/debian/configure.yml"
   tags:
     - configure_openssh
     - configure
