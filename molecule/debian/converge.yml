@@ -5,9 +5,11 @@
     - name: Install requirements for Debian
       when: ansible_os_family == 'Debian'
       ansible.builtin.apt:
-        name: gnupg
+        name: "{{ item }}"
         state: present
         update_cache: true
+      with_items:
+        - gnupg
     - name: "Include leadlineit.openssh"
       ansible.builtin.include_role:
         name: "leadlineit.openssh"

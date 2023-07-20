@@ -7,16 +7,15 @@ verifier:
   name: ansible
 driver:
   name: docker
-lint: |
-  set -e
-  yamllint .
-  ansible-lint
-  flake8
 platforms:
   - name: instance-centos
-    image: "6nsh/centos:molecule-${MOLECULE_DISTRO:-stream8}"
-    command: ""
+    image: "6nsh/centos${MOLECULE_DISTRO:--stream8}-ansible:latest"
+    command: ${MOLECULE_DOCKER_COMMAND:-""}
     volumes:
-      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+      - /sys/fs/cgroup:/sys/fs/cgroup:rw
+    tmpfs:
+      - /run
+      - /tmp
+    cgroupns_mode: host
     privileged: true
     pre_build_image: true
