@@ -1,10 +1,10 @@
 ---
 - name: Fill up TrustedUserCAKeys file
+  when: ssh_trusted_user_ca_keys is defined
   ansible.builtin.template:
     src: trusted-user-ca-keys.j2
     dest: /etc/ssh/trusted-user-ca-keys.pem
     mode: '644'
-  when: ssh_trusted_user_ca_keys is defined
 
 - name: Configure sshd_config file
   ansible.builtin.template:

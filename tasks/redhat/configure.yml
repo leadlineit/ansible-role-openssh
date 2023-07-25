@@ -1,10 +1,10 @@
 ---
 - name: Fill up TrustedUserCAKeys file
+  when: ssh_trusted_user_ca_keys is defined
   ansible.builtin.template:
     src: trusted-user-ca-keys.j2
     dest: /etc/ssh/trusted-user-ca-keys.pem
     mode: '644'
-  when: ssh_trusted_user_ca_keys is defined
 
 - name: Configure sshd_config file
   ansible.builtin.template:
@@ -13,6 +13,11 @@
     mode: '644'
   notify:
     - Reload sshd service
+
+- name: Generate ssh_host_keys for Centos7
+  when: ansible_distribution_major_version == "7"
+  ansible.builtin.command: ssh-keygen -A
+  changed_when: false
 
 - name: Check syntax of sshd_config file
   ansible.builtin.command: sshd -t
