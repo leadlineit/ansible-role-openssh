@@ -23,7 +23,7 @@
       runs-on: ubuntu-latest
       steps:
         - name: checkout
-          uses: actions/checkout@v3
+          uses: actions/checkout@v4
           with:
             path: 'leadlineit.openssh'
   
@@ -57,7 +57,7 @@
             - '9'
       steps:
         - name: checkout
-          uses: actions/checkout@v3
+          uses: actions/checkout@v4
           with:
             path: 'leadlineit.openssh'
   
@@ -92,7 +92,7 @@
             - '7'
       steps:
         - name: checkout
-          uses: actions/checkout@v3
+          uses: actions/checkout@v4
           with:
             path: 'leadlineit.openssh'
         
@@ -122,7 +122,7 @@
       runs-on: ubuntu-latest
       steps:
         - name: checkout
-          uses: actions/checkout@v3
+          uses: actions/checkout@v4
           with:
             path: 'leadlineit.openssh'
   
